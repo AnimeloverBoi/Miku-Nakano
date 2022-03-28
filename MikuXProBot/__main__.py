@@ -6,17 +6,17 @@ import random
 from sys import argv
 from typing import Optional
 
-import MikuXProBot.modules.sql.users_sql as sql
+import MADARABOT.modules.sql.users_sql as sql
 
-from MikuXProBot import (ALLOW_EXCL, CERT_PATH, DONATION_LINK, LOGGER,
+from MADARABOT import (ALLOW_EXCL, CERT_PATH, DONATION_LINK, LOGGER,
                           OWNER_ID, PORT, SUPPORT_CHAT, TOKEN, URL, WEBHOOK,
                           SUPPORT_CHAT, dispatcher, StartTime, telethn, updater)
 # needed to dynamically load modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
-from MikuXProBot.modules import ALL_MODULES
-from MikuXProBot.modules.helper_funcs.chat_status import is_user_admin
-from MikuXProBot.modules.helper_funcs.misc import paginate_modules
-from MikuXProBot.script import PM_START_TEXT, MIKU_DISPACHER_PIC, PM_PHOTO, MIKU_N_IMG, TEXXT, MIKU_IMG
+from MADARABOT.modules import ALL_MODULES
+from MADARABOT.modules.helper_funcs.chat_status import is_user_admin
+from MADARABOT.modules.helper_funcs.misc import paginate_modules
+from MADARABOT.script import PM_START_TEXT, MADARA_DISPACHER_PIC, PM_PHOTO, MADARA_IMG, TEXXT, MADARA_IMG
 from telegram import (InlineKeyboardButton, InlineKeyboardMarkup, ParseMode,
                       Update)
 from telegram.error import (BadRequest, ChatMigrated, NetworkError,
@@ -57,10 +57,7 @@ buttons = [
     [
                         InlineKeyboardButton(
                              text="🏹 Summon Me",
-                             url="https://t.me/MikuXProBot?startgroup=true"),
-                        InlineKeyboardButton(
-                             text="🗞️ Repo",
-                             url="https://github.com/h0daka/Miku-Nakano"),
+                             url="https://t.me/madaraghost_bot?startgroup=true"),
                     ],
                    [                  
                        InlineKeyboardButton(
@@ -68,7 +65,7 @@ buttons = [
                              callback_data="help_back"),
                         InlineKeyboardButton(
                              text=" 💫 About Me",
-                             callback_data="miku_"),
+                             callback_data="MADARA_"),
                     ], 
     ]
 
