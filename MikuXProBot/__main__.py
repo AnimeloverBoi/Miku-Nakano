@@ -78,7 +78,7 @@ HELP_STRINGS = """
  • /settings:
    • in PM: will send you your settings for all supported modules.
    • in a group: will redirect you to pm, with all that chat's settings.
-For all command use /* [or](https://telegra.ph/file/85a404cf9edbd797c829f.jpg) *!*
+For all command use /* [or](https://telegra.ph/file/c0683800b0d8d1c610c64.jpg) *!*
 """.format(
     dispatcher.bot.first_name,""
     if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\nKindly use ! for commands if / is not working\n")
@@ -96,7 +96,7 @@ CHAT_SETTINGS = {}
 USER_SETTINGS = {}
 
 for module_name in ALL_MODULES:
-    imported_module = importlib.import_module("MikuXProBot.modules." +
+    imported_module = importlib.import_module("madaraghost_bot.modules." +
                                               module_name)
     if not hasattr(imported_module, "__mod_name__"):
         imported_module.__mod_name__ = imported_module.__name__
@@ -204,17 +204,17 @@ def start(update: Update, context: CallbackContext):
             )
     else:
         update.effective_message.reply_photo(
-                random.choice(MIKU_IMG), TEXXT.format(mention_html(update.effective_user.id, update.effective_user.first_name)),
+                random.choice(MADARA_IMG), TEXXT.format(mention_html(update.effective_user.id, update.effective_user.first_name)),
             parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
                 [
                   [                  
                        InlineKeyboardButton(
                              text="🚑 Support",
-                             url=f"https://t.me/MikusSupport"),
+                             url=f"https://t.me/madarasupport"),
                        InlineKeyboardButton(
                              text="🛰️ Updates",
-                             url="https://t.me/MikuXUpdates")
+                             url="https://t.me/MadaraUpdates")
                      ] 
                 ]
             ),
@@ -306,11 +306,11 @@ def help_button(update, context):
 
 
 @run_async
-def miku_callback_data(update, context):
+def MADARA_callback_data(update, context):
     query = update.callback_query
     bot = context.bot
     uptime = get_readable_time((time.time() - StartTime))
-    if query.data == "miku_":
+    if query.data == "MADARA_":
         query.message.edit_text(
             text=f"""Hello [{update.effective_user.first_name}](tg://user?id={update.effective_user.id}) I'm {context.bot.first_name}, a powerful group management bot built to help you manage your group easily.
                  \n❍ I can restrict users.
@@ -320,26 +320,26 @@ def miku_callback_data(update, context):
                  \n❍ I have a note keeping system, blacklists, and even predetermined replies on certain keywords.
                  \n❍ I check for admins' permissions before executing any command and more stuffs
                  \n❍ Miku licensed under the GNU General Public License v3.0
-                 \n❍ If you have any question about Miku, let us know at [Miku Support](t.me/{SUPPORT_CHAT}).""",
+                 \n❍ If you have any question about MADARA, let us know at [Miku Support](t.me/{SUPPORT_CHAT}).""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="🌏 My Master", url="t.me/h0daka"),
+                    InlineKeyboardButton(text="🌏 My Master", url="https://t.me/pramisdon"),
                     InlineKeyboardButton(text="✨ Try Inline", switch_inline_query_current_chat="",),
                  ],
                  [
-                    InlineKeyboardButton(text="🕊️ Updates", url="t.me/MikuXUpdates"),
-                    InlineKeyboardButton(text="🚑 Support", url="t.me/Mikussupport"),
+                    InlineKeyboardButton(text="🕊️ Updates", url="https://t.me/MadaraUpdates"),
+                    InlineKeyboardButton(text="🚑 Support", url="https://t.me/madarasupport"),
                  ],
                  [
-                    InlineKeyboardButton(text="❌ Back", callback_data="miku_back")
+                    InlineKeyboardButton(text="❌ Back", callback_data="MADARA_back")
                  ],
                 ]
             ),
         )
-    elif query.data == "miku_back":
+    elif query.data == "MADARA_back":
         first_name = update.effective_user.first_name
         query.message.edit_text(
                 PM_START_TEXT.format(
@@ -365,7 +365,7 @@ def get_help(update: Update, context: CallbackContext):
         if len(args) >= 2 and any(args[1].lower() == x for x in HELPABLE):
             module = args[1].lower()
             update.effective_message.reply_photo(
-            random.choice(MIKU_N_IMG), caption= f"Oh Darling, Click the Button Below to get help of {module.capitalize()}",
+            random.choice(MADARA_N_IMG), caption= f"Oh Darling, Click the Button Below to get help of {module.capitalize()}",
                 reply_markup=InlineKeyboardMarkup([[
                     InlineKeyboardButton(
                         text="click here",
@@ -375,11 +375,11 @@ def get_help(update: Update, context: CallbackContext):
             return
 
         update.effective_message.reply_photo(
-            random.choice(MIKU_N_IMG), caption= "Click the Button Below to get the list of possible commands.",
+            random.choice(MADARA_N_IMG), caption= "Click the Button Below to get the list of possible commands.",
             reply_markup=InlineKeyboardMarkup(
                 [
                   [
-                  InlineKeyboardButton(text=" Click here", url="https://t.me/MikuXProBot?start=help")
+                  InlineKeyboardButton(text=" Click here", url="https://t.me/madaraghost_bot?start=help")
                   ]
                 ]
             ),
@@ -396,7 +396,7 @@ def get_help(update: Update, context: CallbackContext):
                 [[InlineKeyboardButton(text="Back",
                                        callback_data="help_back"),
                   InlineKeyboardButton(text="Support",
-                                       url="t.me/Mikussupport")]]))
+                                       url="https://t.me/madarasupport")]]))
 
     else:
         send_help(chat.id, HELP_STRINGS)
@@ -520,7 +520,7 @@ def get_settings(update: Update, context: CallbackContext):
         if is_user_admin(chat, user.id):
             text = "Click here to get this chat's settings, as well as yours."
             msg.reply_photo(
-                random.choice(MIKU_N_IMG), caption=text,
+                random.choice(MADARA_N_IMG), caption=text,
                 reply_markup=InlineKeyboardMarkup([[
                     InlineKeyboardButton(
                         text="Settings",
@@ -589,20 +589,20 @@ def main():
 
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
-            dispatcher.bot.send_message(f"@{SUPPORT_CHAT}", f"[I'm In Online]({MIKU_DISPACHER_PIC})", parse_mode=ParseMode.MARKDOWN,
+            dispatcher.bot.send_message(f"@{SUPPORT_CHAT}", f"[I'm In Online]({MADARA_DISPACHER_PIC})", parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
                   [                  
                        InlineKeyboardButton(
                              text="[► Summon Me◄]",
-                             url="https://t.me/MikuXProBot?startgroup=true")
+                             url="https://t.me/madaraghost_bot?startgroup=true")
                      ] 
                 ]
             ),
         ) 
         except Unauthorized:
             LOGGER.warning(
-                "Miku can't able to send message to support_chat, go and check!")
+                "MADARA can't able to send message to support_chat, go and check!")
         except BadRequest as e:
             LOGGER.warning(e.message)
 
@@ -617,7 +617,7 @@ def main():
     settings_callback_handler = CallbackQueryHandler(
         settings_button, pattern=r"stngs_")
 
-    about_callback_handler = CallbackQueryHandler(miku_callback_data, pattern=r"miku_")
+    about_callback_handler = CallbackQueryHandler(miku_callback_data, pattern=r"MADARA_")
     donate_handler = CommandHandler("donate", donate)
     migrate_handler = MessageHandler(Filters.status_update.migrate,
                                      migrate_chats)
@@ -645,7 +645,7 @@ def main():
             updater.bot.set_webhook(url=URL + TOKEN)
 
     else:
-        LOGGER.info("Finally Miku Is In Online")
+        LOGGER.info("Finally MADARA Is In Online")
         updater.start_polling(timeout=15, read_latency=4, drop_pending_updates=True, allowed_updates=Update.ALL_TYPES)
 
     if len(argv) not in (1, 3, 4):
